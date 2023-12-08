@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensor-deployment
+  labels:
+    type: backend
+    app: sensor
+spec: 
+  replicas: 3
+  selector:
+    matchLabels:
+      type: backend
+      app: sensor
+  template:
+    metadata:
+      name: sensor-pod
+      labels:
+        type: backend
+        app: sensor
+    spec:
+      containers:
+        - name: sensor-container
+          image: europe-central2-docker.pkg.dev/macro-parity-403112/sensor/sensor:1
+          env:
+            - name: SENSOR_INTERVAL_MS
+              value: "10000"
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 200m
