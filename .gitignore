@@ -18,3 +18,8 @@ buildNumber.properties
 
 # ignore keys
 keys/
+
+
+# terraform
+.terraform/
+.terraform.lock.hcl

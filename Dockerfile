@@ -8,6 +8,7 @@ ARG SRC
 ENV GOOGLE_APPLICATION_CREDENTIALS=/keys/deployed-instance.json
 ENV DOCKER_SRC=/app
 ENV JAR_DIR=/jar
+ENV PROJECT=terraform-408207
 
 COPY ${SRC} ${DOCKER_SRC}
 COPY ${GCP_CREDENTIALS} ${GOOGLE_APPLICATION_CREDENTIALS}
@@ -18,7 +19,7 @@ RUN tar -xvzf google-cloud-cli-453.0.0-linux-x86_64.tar.gz -C /
 RUN rm -rf google-cloud-cli-453.0.0-linux-x86_64.tar.gz
 RUN ln -s /google-cloud-sdk/bin/gcloud /usr/bin/gcloud
 RUN gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
-RUN gcloud config set project macro-parity-403112
+RUN gcloud config set project ${PROJECT}
 
 
 WORKDIR ${DOCKER_SRC}
